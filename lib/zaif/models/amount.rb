@@ -49,6 +49,8 @@ module Zaif
   end
 
   class OtherAmount < Amount
-    def valuable?; true; end
+    def valuable?
+      true
+    end
   end
 end
