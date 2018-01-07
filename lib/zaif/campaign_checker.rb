@@ -12,6 +12,8 @@ module Zaif
     def initialize(id = nil)
       @id = id || load_id || MIN_ID
       @agent = Crawler.new
+
+      @debug = !ENV["DEBUG"].nil?
     end
 
     def run
@@ -36,8 +38,12 @@ module Zaif
         File.open(ID_FILE, "wb") { |f| Marshal.dump(@id, f) }
       end
 
+      def debug_puts(msg)
+        puts msg if @debug
+      end
+
       def abort_not_found
-        puts "#{@url} is 404"
+        debug_puts "#{@url} is 404"
         save_id
         exit
       end
