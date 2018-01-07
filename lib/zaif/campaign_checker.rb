@@ -67,8 +67,15 @@ module Zaif
       end
 
       def render(campaign)
-        c = campaign
-        return if campaign.enable_count <= 0
+        if campaign.enable_count <= 0
+          debug_puts "#{@url} is over."
+          return
+        end
+        unless campaign.amount.valuable?
+          debug_puts "#{@url} #{campaign.amount_str} is not valuable."
+          return
+        end
+
         puts CampaignPresenter.new(campaign).render
       end
   end
