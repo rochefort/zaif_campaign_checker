@@ -31,7 +31,6 @@ module Zaif
 
     def valuable?
       min_amount = self.class::MIN_AMOUNT
-      raise "Called Abstract Method" if min_amount.zero?
       @amount >= min_amount
     end
   end
@@ -48,9 +47,5 @@ module Zaif
     MIN_AMOUNT = 1
   end
 
-  class OtherAmount < Amount
-    def valuable?
-      true
-    end
-  end
+  class OtherAmount < Amount; end
 end
